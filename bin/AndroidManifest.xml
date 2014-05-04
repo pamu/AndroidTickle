@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         
-        <service android:name="com.nagarjuna_pamu.tickle.MessageSenderService">
+        <service android:name="com.nagarjuna_pamu.tickle.WebsocketService">
         </service>
         
         <receiver android:name="com.nagarjuna_pamu.tickle.BootReceiver">

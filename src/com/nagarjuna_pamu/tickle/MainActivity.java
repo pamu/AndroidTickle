@@ -22,6 +22,11 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        /**
+         * start the web socket service 
+         */
+        startService(new Intent(getApplicationContext(), WebsocketService.class));
+        
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -94,6 +99,7 @@ public class MainActivity extends ActionBarActivity {
 			    		/**
 			    		 * Don't send any message as message is empty
 			    		 */
+			    		getActivity().startService(new Intent(getActivity(),WebsocketService.class));
 			    		
 			    	}else{
 			    		
@@ -102,7 +108,7 @@ public class MainActivity extends ActionBarActivity {
 			    		/**
 			    		 *Now send an intent to MessageSender Service
 			    		 */
-			    		Intent sendIntent = new Intent(getActivity().getApplicationContext(), MessageSenderService.class);
+			    		Intent sendIntent = new Intent(getActivity().getApplicationContext(), WebsocketService.class);
 			    		/**
 			    		 * wrap the message in the Bundle
 			    		 */
