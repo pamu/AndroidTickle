@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.os.Build;
+import android.provider.Settings.Secure;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -21,11 +22,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
-        /**
-         * start the web socket service 
-         */
-        startService(new Intent(getApplicationContext(), WebsocketService.class));
         
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
@@ -61,6 +57,7 @@ public class MainActivity extends ActionBarActivity {
     public static class PlaceholderFragment extends Fragment {
     	
     	private EditText msg;
+    	private EditText name;
     	private Button btn;
 
         public PlaceholderFragment() {
@@ -75,6 +72,10 @@ public class MainActivity extends ActionBarActivity {
              * Inflate Edit Text from XML
              */
             msg = (EditText) rootView.findViewById(R.id.editText1);
+            /**
+             * Read send EditText for Name
+             */
+            name = (EditText) rootView.findViewById(R.id.editText2);
             
             /**
              * Inflate Button from XML
@@ -114,6 +115,16 @@ public class MainActivity extends ActionBarActivity {
 			    		 */
 			    		Bundle args = new Bundle();
 			    		args.putString("message", message);
+			    		
+			    		/**
+			    		 * get the name from edit text
+			    		 */
+			    		String text = name.getText().toString().trim();
+			    		if(text.equals("unknown")) {
+			    			text = Secure.getString(getActivity().getContentResolver(), Secure.ANDROID_ID);
+			    		}
+			    		args.putString("name", text);
+			    		
 			    		/**
 			    		 * attach the Bundle to the Intent
 			    		 */
