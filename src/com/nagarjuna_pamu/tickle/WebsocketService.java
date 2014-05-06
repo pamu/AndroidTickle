@@ -26,7 +26,7 @@ public class WebsocketService extends Service {
 	
 	private static final String TAG = "WebsocketService";
 	
-	public static final String tickle = "ws://10.8.2.44:9000/websocket";
+	public static final String tickle = "ws://10.8.4.220:9000/websocket";
 	
 	@Override
 	public IBinder onBind(Intent arg0) {
